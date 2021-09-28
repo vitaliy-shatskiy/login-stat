@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LoginStat.Common\LoginStat.Common.csproj" />
       <ProjectReference Include="..\LoginStat.DAL\LoginStat.DAL.csproj" />
     </ItemGroup>
 
