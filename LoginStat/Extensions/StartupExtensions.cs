@@ -48,6 +48,7 @@ namespace LoginStat.Extensions
         public static void RegisterCustomServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IStatisticService, StatisticService>();
         }
 
         public static void RegisterSwagger(this IServiceCollection services)
