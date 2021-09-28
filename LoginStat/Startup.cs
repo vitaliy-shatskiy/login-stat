@@ -47,7 +47,16 @@ namespace LoginStat
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMiddleware<GlobalExceptionMiddleware>();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwaggerWithUI();
+            }
+            else
+            {
+                app.UseHsts();
+            }
+
             app.UseCors("AnyOrigin");
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -58,15 +67,7 @@ namespace LoginStat
             app.UseAuthorization();
             app.UseStaticFiles();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwaggerWithUI();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            app.UseMiddleware<GlobalExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

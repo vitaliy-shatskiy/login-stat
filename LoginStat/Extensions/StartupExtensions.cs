@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using LoginStat.BLL.MappingProfiles;
 using LoginStat.BLL.Services;
 using LoginStat.BLL.Services.Abstract;
+using LoginStat.Common.Validators.Users;
 using LoginStat.DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +25,9 @@ namespace LoginStat.Extensions
 
         public static void AddValidation(this IServiceCollection services)
         {
-            // services
-            //     .AddControllers()
-            //     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Validator>());
+            services
+                .AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserDTOValidator>());
         }
 
         public static void AddLoginStatDb(this IServiceCollection services, IConfiguration configuration)
