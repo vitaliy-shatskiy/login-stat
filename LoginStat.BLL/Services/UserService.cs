@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using LoginStat.BLL.Services.Abstract;
@@ -18,11 +19,13 @@ namespace LoginStat.BLL.Services
         {
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetUsersAsync(int count)
         {
             var users = await _context.Users
                 .AsNoTracking()
                 .Include(u => u.UserLoginAttempts)
+                .OrderByDescending(user => user.UserLoginAttempts.Count)
+                .Take(count)
                 .ToListAsync();
             if (users.Count == 0)
                 throw new NotFoundException("Users");

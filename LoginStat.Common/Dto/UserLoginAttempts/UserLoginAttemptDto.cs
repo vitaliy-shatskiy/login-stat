@@ -1,5 +1,4 @@
 ﻿using System;
-using LoginStat.DAL.Entities;
 
 namespace LoginStat.Common.Dto.UserLoginAttempts
 {

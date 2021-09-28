@@ -5,12 +5,12 @@ namespace LoginStat.DAL.Context
 {
     public class LoginStatContext : DbContext
     {
-        public DbSet<User> Users { get; private set; }
-        public DbSet<UserLoginAttempt> UserLoginAttempts { get; private set; }
-
         public LoginStatContext(DbContextOptions<LoginStatContext> options) : base(options)
         {
         }
+
+        public DbSet<User> Users { get; private set; }
+        public DbSet<UserLoginAttempt> UserLoginAttempts { get; private set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

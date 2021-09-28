@@ -7,8 +7,8 @@ namespace LoginStat.BLL.Services.Abstract
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserDto>> GetUsersAsync();
-        
+        Task<IEnumerable<UserDto>> GetUsersAsync(int count);
+
         Task<UserDto> GetUserByIdAsync(Guid userId);
         Task<UserDto> GetUserByEmailAsync(string email);
         Task<UserDto> CreateUserAsync(CreateUserDto userDto);
