@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using FluentValidation.AspNetCore;
 using LoginStat.BLL.Services.Abstract;
 using LoginStat.Common.Dto.Users;
 using Microsoft.AspNetCore.Mvc;
@@ -21,20 +20,21 @@ namespace LoginStat.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> Get()
+        [HttpGet("all/{count:int}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> Get(int count)
         {
-            return Ok(await _userService.GetUsersAsync());
+            return Ok(await _userService.GetUsersAsync(count));
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<UserDto>> GetById([NotNull]Guid id)
+        public async Task<ActionResult<UserDto>> GetById([NotNull] Guid id)
         {
             return Ok(await _userService.GetUserByIdAsync(id));
         }
-        
+
         [HttpGet("email/{email}")]
-        public async Task<ActionResult<UserDto>> GetByEmail([NotNull][EmailAddress][MaxLength(25)]string email)
+        public async Task<ActionResult<UserDto>> GetByEmail([NotNull] [EmailAddress] [MaxLength(25)]
+            string email)
         {
             return Ok(await _userService.GetUserByEmailAsync(email));
         }
@@ -52,7 +52,7 @@ namespace LoginStat.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Delete([NotNull]Guid id)
+        public async Task<IActionResult> Delete([NotNull] Guid id)
         {
             await _userService.DeleteUserByIdAsync(id);
             return NoContent();

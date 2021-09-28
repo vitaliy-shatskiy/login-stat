@@ -1,12 +1,10 @@
 using FluentValidation.AspNetCore;
-using LoginStat.DAL.Context;
 using LoginStat.Extensions;
 using LoginStat.Middlewares;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
