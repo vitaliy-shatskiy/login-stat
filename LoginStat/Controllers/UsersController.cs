@@ -57,5 +57,11 @@ namespace LoginStat.Controllers
             await _userService.DeleteUserByIdAsync(id);
             return NoContent();
         }
+
+        [HttpPost("{id:guid}/loginAttempt")]
+        public async Task<ActionResult<UserDto>> Create([NotNull] Guid id, [FromQuery] bool? isSuccess)
+        {
+            return Ok(await _userService.CreateUserLoginAttemptAsync(id, isSuccess));
+        }
     }
 }
