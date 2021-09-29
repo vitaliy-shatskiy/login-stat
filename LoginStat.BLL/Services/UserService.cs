@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Bogus;
 using LoginStat.BLL.Services.Abstract;
 using LoginStat.BLL.Services.Abstract.Base;
+using LoginStat.Common.Dto.UserLoginAttempts;
 using LoginStat.Common.Dto.Users;
 using LoginStat.Common.Exceptions;
 using LoginStat.DAL.Context;
@@ -85,6 +87,20 @@ namespace LoginStat.BLL.Services
                        ?? throw new NotFoundException("User", userId.ToString());
             _context.Remove(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<UserLoginAttemptDto> CreateUserLoginAttemptAsync(Guid userId, bool? isSuccess)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId)
+                       ?? throw new NotFoundException("User", userId.ToString());
+            var userLoginAttempt = await _context.UserLoginAttempts.AddAsync(new UserLoginAttempt
+            {
+                UserId = userId,
+                AttemptTime = DateTime.Now,
+                IsSuccess = isSuccess ?? false
+            });
+            await _context.SaveChangesAsync();
+            return _mapper.Map<UserLoginAttemptDto>(userLoginAttempt.Entity);
         }
     }
 }
