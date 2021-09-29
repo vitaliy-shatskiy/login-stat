@@ -40,7 +40,7 @@ namespace LoginStat.DAL.Seeding
                 .RuleFor(p => p.Id, _ => Guid.NewGuid())
                 .RuleFor(p => p.UserId, faker => faker.PickRandom(users).Id)
                 .RuleFor(p => p.IsSuccess, faker => faker.Random.Bool())
-                .RuleFor(p => p.AttemptTime, faker => faker.Date.Between(faker.Date.Past(), DateTime.Now));
+                .RuleFor(p => p.AttemptTime, faker => faker.Date.Between(faker.Date.Past(2), DateTime.Now));
             return userLogins.Generate(count);
         }
     }
