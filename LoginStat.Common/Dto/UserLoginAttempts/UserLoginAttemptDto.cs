@@ -2,7 +2,7 @@
 
 namespace LoginStat.Common.Dto.UserLoginAttempts
 {
-    public class UserLoginAttemptDto
+    public sealed class UserLoginAttemptDto
     {
         public Guid Id { get; set; }
         public DateTime AttemptTime { get; set; }
